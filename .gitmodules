@@ -1,0 +1,15 @@
+[submodule "faas-share-test"]
+	path = faas-share-test
+	url = git@github.com:Interstellarss/faas-share-test.git
+[submodule "faas-share"]
+	path = faas-share
+	url = git@github.com:Interstellarss/faas-share.git
+	branch = mps
+[submodule "morphling"]
+	path = morphling
+	url = git@github.com:YukioZzz/morphling.git
+	branch = faas
+[submodule "FaST-Manager"]
+	branch = compare
+	path = FaST-Manager
+	url = git@github.com:YukioZzz/FaST-Manager.git

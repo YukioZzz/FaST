@@ -1,0 +1,103 @@
+apiVersion: faasshare.tum/v1
+kind: SharePod
+metadata:
+  name: rnnt
+  namespace: faas-share-fn
+  labels:
+    "com.openfaas.scale.max": "1"
+  annotations:
+    "kubeshare/gpu_request": "0.6"
+    "kubeshare/gpu_limit": "0.6"
+    "kubeshare/gpu_mem": "1073741824"
+spec:
+  replicas: 1
+  podSpec:
+    terminationGracePeriodSeconds: 1
+    containers:
+      - name: rnnt
+        image: yukiozhu/mlperf-faas-rnnt 
+        ports:
+          - containerPort: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+          - name: "model-volume"
+            mountPath: "/models/"
+    volumes:
+      - name: "model-volume"
+        hostPath:
+          path: "/models/"
+
+---
+apiVersion: faasshare.tum/v1
+kind: SharePod
+metadata:
+  name: resnet02
+  namespace: faas-share-fn
+  labels:
+    "com.openfaas.scale.max": "1"
+  annotations:
+    "kubeshare/gpu_request": "0.2"
+    "kubeshare/gpu_limit": "0.2"
+    "kubeshare/gpu_mem": "1073741824"
+spec:
+  replicas: 1
+  podSpec:
+    terminationGracePeriodSeconds: 1
+    containers:
+      - name: resnet
+        image: yukiozhu/mlperf-faas-resnet:pytorch-t1 
+        ports:
+          - containerPort: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+          - name: "model-volume"
+            mountPath: "/models/"
+    volumes:
+      - name: "model-volume"
+        hostPath:
+          path: "/models/"
+
+---
+
+apiVersion: faasshare.tum/v1
+kind: SharePod
+metadata:
+  name: resnet
+  namespace: faas-share-fn
+  labels:
+    "com.openfaas.scale.max": "1"
+  annotations:
+    "kubeshare/gpu_request": "0.2"
+    "kubeshare/gpu_limit": "0.2"
+    "kubeshare/gpu_mem": "1073741824"
+spec:
+  replicas: 1
+  podSpec:
+    terminationGracePeriodSeconds: 1
+    containers:
+      - name: resnet
+        image: yukiozhu/mlperf-faas-resnet:pytorch-t1 
+        ports:
+          - containerPort: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+          - name: "model-volume"
+            mountPath: "/models/"
+    volumes:
+      - name: "model-volume"
+        hostPath:
+          path: "/models/"
+
+

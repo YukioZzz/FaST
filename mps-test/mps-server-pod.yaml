@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nvidia-mps
+spec:
+  restartPolicy: OnFailure
+  nodeName: gpu-one
+  hostIPC: true
+  initContainers:
+    - name: set-compute-mode
+      image: nvidia/cuda:11.3.0-runtime-ubuntu18.04
+      command: ['nvidia-smi', '-c', 'EXCLUSIVE_PROCESS']
+      securityContext:
+        capabilities:
+          add: ["SYS_ADMIN"]
+  containers:
+    - image: nvidia/mps
+      name: mps
+      volumeMounts:
+        - name: nvidia-mps
+          mountPath: /tmp/nvidia-mps
+      env:
+        - name: NVIDIA_REQUIRE_VOLTA
+          value: "arch>=5.0"
+      securityContext:
+        capabilities:
+          add: ["SYS_ADMIN"]
+  volumes:
+    - name: nvidia-mps
+      hostPath:
+        path: /tmp/nvidia-mps

@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resnet-deployment
+spec:
+  replicas: 5 
+  selector:
+    matchLabels:
+      app: resnet-mps 
+  template:
+    metadata:
+      labels:
+        app: resnet-mps
+    spec:
+      terminationGracePeriodSeconds: 1
+      hostIPC: true
+      nodeName: gpu-one 
+      containers:
+        - name: resnet
+          image: yukiozhu/mlperf-faas-resnet:pytorch
+          env:
+          - name: CUDA_MPS_ACTIVE_THREAD_PERCENTAGE
+            value: "20"
+          readinessProbe:
+            tcpSocket:
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+          - name: nvidia-mps
+            mountPath: /tmp/nvidia-mps
+          - name: "model-volume"
+            mountPath: "/models/"
+            #command: [ "tail", "-f", "/dev/null" ]
+      volumes:
+      - name: "model-volume"
+        hostPath:
+          path: "/models/"
+      - name: nvidia-mps
+        hostPath:
+          path: /tmp/nvidia-mps
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: resnet-mps
+  name: resnet-mps
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: resnet-mps
+  type: ClusterIP
