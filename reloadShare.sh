@@ -37,9 +37,9 @@ helm repo update \
     --namespace faas-share  \
     --set functionNamespace=faas-share-fn \
     --set generateBasicAuth=false \
-    --set kubeshareDeviceManager.image="yukiozhu/kubeshare-device-manager:v0.1.24-mps-v2" \
-    --set kubeshareNodeDaemon.geminiHookInit.image="yukiozhu/kubeshare-gemini-hook-init:original" \
-    --set kubeshareNodeDaemon.geminiScheduler.image="yukiozhu/kubeshare-gemini-scheduler:unlimit"
+    --set kubeshareDeviceManager.image="yukiozhu/kubeshare-device-manager:v0.1.24-mps" \
+    --set kubeshareNodeDaemon.geminiHookInit.image="yukiozhu/kubeshare-gemini-hook-init:mps" \
+    --set kubeshareNodeDaemon.geminiScheduler.image="yukiozhu/kubeshare-gemini-scheduler:mps"
 
     #--set kubeshareDeviceManager.image="ghcr.io/interstellarss/faas-share:v0.1.23" \
     #--set kubeshareNodeDaemon.geminiHookInit.image="ncy9371/kubeshare-gemini-hook-init:20200429135835" \

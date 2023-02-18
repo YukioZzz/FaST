@@ -13,3 +13,6 @@
 	branch = compare
 	path = FaST-Manager
 	url = git@github.com:YukioZzz/FaST-Manager.git
+[submodule "arrow-tensorstore"]
+	path = arrow-tensorstore
+	url = git@github.com:YukioZzz/arrow-tensorstore.git
