@@ -16,3 +16,6 @@
 [submodule "arrow-tensorstore"]
 	path = arrow-tensorstore
 	url = git@github.com:YukioZzz/arrow-tensorstore.git
+[submodule "FaSTAutoscaler"]
+	path = FaSTAutoscaler
+	url = git@github.com:YukioZzz/FaSTAutoscaler.git
