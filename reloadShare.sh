@@ -1,4 +1,4 @@
-
+prefix=$(pwd)
 kubectl delete sharepod --all -n faas-share-fn
 
 kubectl delete pod  --grace-period=0 --force --all -n faas-share-fn
@@ -42,9 +42,13 @@ helm repo update \
     --set kubeshareNodeDaemon.geminiScheduler.image="yukiozhu/kubeshare-gemini-scheduler:unlimit" \
     --set operator.image="yukiozhu/faas-share:v0.1.24-mps"
 
-    #--set kubeshareDeviceManager.image="ghcr.io/interstellarss/faas-share:v0.1.23" \
-    #--set kubeshareNodeDaemon.geminiHookInit.image="ncy9371/kubeshare-gemini-hook-init:20200429135835" \
-    #--set kubeshareNodeDaemon.geminiScheduler.image="ncy9371/kubeshare-gemini-scheduler:20200429135835"
-    #--set kubeshareNodeDaemon.geminiHookInit.image="yukiozhu/kubeshare-gemini-hook-init:original" \
-    #--set kubeshareNodeDaemon.geminiScheduler.image="yukiozhu/kubeshare-gemini-scheduler:original"
+# Deploy mps and dcgm-exporter
+kubectl apply -f mps-test/mps-server-pod.yaml
+cd $prefix && sudo cp -rf ./dcgm /etc/dcgm-exporter
+kubectl apply -f dcgm/dcgm-exporter.yaml
 
+# Deploy Morphling
+cd $prefix/morphling && chmod +x install.sh && ./install.sh
+
+# Deploy autoscaler
+cd $prefix/FaSTAutoscaler && make apply IMG=yukiozhu/fastautoscaler:latest
