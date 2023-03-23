@@ -16,7 +16,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: "dcgm-exporter"
-  namespace: "kube-system"
+  namespace: "faas-share"
   labels:
     app.kubernetes.io/name: "dcgm-exporter"
     app.kubernetes.io/version: "3.1.2"
@@ -32,6 +32,9 @@ spec:
       labels:
         app.kubernetes.io/name: "dcgm-exporter"
         app.kubernetes.io/version: "3.1.2"
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9400'
       name: "dcgm-exporter"
     spec:
       containers:
@@ -75,11 +78,12 @@ kind: Service
 apiVersion: v1
 metadata:
   name: "dcgm-exporter"
-  namespace: "kube-system"
+  namespace: "faas-share"
   labels:
     app.kubernetes.io/name: "dcgm-exporter"
     app.kubernetes.io/version: "3.1.2"
 spec:
+  type: NodePort
   selector:
     app.kubernetes.io/name: "dcgm-exporter"
     app.kubernetes.io/version: "3.1.2"
