@@ -30,10 +30,21 @@ kubectl taint node `hostname` node-role.kubernetes.io/master:NoSchedule-
 
 ```
 
+- Install Kubernetes (Node)
+```
+bash install_k8s_node.sh
+```
+Then join the master node after install nvidia-container-toolkit shown below
+```
+# check the join command
+kubeadm token create --print-join-command
+# follow the command prompted and join the node to the master node
+kubeadm join <ip:port> --token <the_join_token>
+```
 
 
 
-- Install/configure nvidia-container-toolkit
+- Install/configure nvidia-container-toolkit (both Master and Node)
 ```
 bash install_nvidia_container_toolkit.sh
 ```
