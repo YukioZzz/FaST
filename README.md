@@ -5,7 +5,9 @@ Base Infrastructure Configuraiton and Deployment:
 ```
 sudo apt-get update
 sudo apt-get install -y nvidia-driver-525
-nvidia-smi. ## if has problem, reboot the server
+nvidia-smi
+## if has problem, reboot the server
+sudo reboot
 ```
 
 - Install CUDA toolkit
