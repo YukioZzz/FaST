@@ -19,6 +19,19 @@ sudo apt install -y nvidia-cuda-toolkit
 ```
 bash install_k8s_master_node.sh
 ```
+check if the master node's is under untiant
+```
+kubectl describe node <node_name> | grep -i taint
+```
+if not untaint and the master node is also regard as a computing node, untiant the node
+```
+kubectl taint node `hostname` node-role.kubernetes.io/control-plane:NoSchedule-
+kubectl taint node `hostname` node-role.kubernetes.io/master:NoSchedule-
+
+```
+
+
+
 
 - Install/configure nvidia-container-toolkit
 ```
