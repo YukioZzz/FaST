@@ -1,34 +1,60 @@
 ## FaST: a FaaS oriented Spatio-Temporal Sharing Framework
 
-Base Infrastructure Configuraiton and Deployment:
-- Install CUDA Driver
+#### Base Infrastructure Configuraiton and Deployment:
+- Install CUDA Driver. (both Master and Node)
 ```
 sudo apt-get update
-sudo apt-get install nvidia-driver-525
-nvidia-smi. ## if has problem, reboot the server
+sudo apt-get install -y nvidia-driver-525
+nvidia-smi
+## if has problem, reboot the server
+sudo reboot
 ```
 
-- Install CUDA toolkit
+- Install CUDA toolkit (both Master and Node)
 ```
-sudo apt install nvidia-cuda-toolkit
+sudo apt install -y nvidia-cuda-toolkit
 ```
 
 - Install Kubernetes (Master Node)
 ```
 bash install_k8s_master_node.sh
 ```
+check if the master node's is under untiant
+```
+kubectl describe node <node_name> | grep -i taint
+```
+if not untaint and the master node is also regard as a computing node, untiant the node
+```
+kubectl taint node `hostname` node-role.kubernetes.io/control-plane:NoSchedule-
+kubectl taint node `hostname` node-role.kubernetes.io/master:NoSchedule-
 
-- Install/configure nvidia-container-toolkit
+```
+
+- Install Kubernetes (Node)
+```
+bash install_k8s_node.sh
+```
+Then join the master node after install nvidia-container-toolkit shown below
+```
+# check the join command
+kubeadm token create --print-join-command
+# follow the command prompted and join the node to the master node
+kubeadm join <ip:port> --token <the_join_token>
+```
+
+
+
+- Install/configure nvidia-container-toolkit (both Master and Node)
 ```
 bash install_nvidia_container_toolkit.sh
 ```
 
-- Install and deploy nvidia-device-plugin:
+- Install and deploy nvidia-device-plugin: (only the Master)
 ```
 kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.13.0/nvidia-device-plugin.yml
 ```
 
-Deployment:
+#### Deployment:
 
 - clone repo:
 ```
