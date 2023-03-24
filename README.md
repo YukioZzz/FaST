@@ -1,7 +1,7 @@
 ## FaST: a FaaS oriented Spatio-Temporal Sharing Framework
 
 #### Base Infrastructure Configuraiton and Deployment:
-- Install CUDA Driver
+- Install CUDA Driver. (both Master and Node)
 ```
 sudo apt-get update
 sudo apt-get install -y nvidia-driver-525
@@ -10,7 +10,7 @@ nvidia-smi
 sudo reboot
 ```
 
-- Install CUDA toolkit
+- Install CUDA toolkit (both Master and Node)
 ```
 sudo apt install -y nvidia-cuda-toolkit
 ```
@@ -49,7 +49,7 @@ kubeadm join <ip:port> --token <the_join_token>
 bash install_nvidia_container_toolkit.sh
 ```
 
-- Install and deploy nvidia-device-plugin:
+- Install and deploy nvidia-device-plugin: (only the Master)
 ```
 kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.13.0/nvidia-device-plugin.yml
 ```
