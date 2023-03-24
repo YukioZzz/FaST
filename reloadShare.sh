@@ -32,6 +32,11 @@ kubectl create -f deploy/crd.yaml
 kubectl get pod -A | grep node-daemon | awk '{print$2}' | xargs kubectl delete pod -n kube-system
 kubectl get pod -A | grep nvidia-device | awk '{print$2}' | xargs kubectl delete pod -n kube-system
 
+# Deploy mps and dcgm-exporter
+ kubectl apply -f mps-test/mps-server-pod.yaml
+cd $prefix && sudo cp -rf ./dcgm /etc/dcgm-exporter
+kubectl apply -f dcgm/dcgm-exporter.yaml
+
 helm repo update \
 && helm upgrade faas-share --debug --install faas-share/faas-share \
     --namespace faas-share  \
@@ -41,11 +46,6 @@ helm repo update \
     --set kubeshareNodeDaemon.geminiHookInit.image="yukiozhu/kubeshare-gemini-hook-init:mps" \
     --set kubeshareNodeDaemon.geminiScheduler.image="yukiozhu/kubeshare-gemini-scheduler:unlimit" \
     --set operator.image="yukiozhu/faas-share:v0.1.24-mps"
-
-# Deploy mps and dcgm-exporter
-kubectl apply -f mps-test/mps-server-pod.yaml
-cd $prefix && sudo cp -rf ./dcgm /etc/dcgm-exporter
-kubectl apply -f dcgm/dcgm-exporter.yaml
 
 # Deploy Morphling
 cd $prefix/morphling && chmod +x install.sh && ./install.sh

@@ -4,7 +4,6 @@ metadata:
   name: nvidia-mps
 spec:
   restartPolicy: OnFailure
-  nodeName: gpu-one
   hostIPC: true
   initContainers:
     - name: set-compute-mode
