@@ -4,13 +4,13 @@ Base Infrastructure Configuraiton and Deployment:
 - Install CUDA Driver
 ```
 sudo apt-get update
-sudo apt-get install nvidia-driver-525
+sudo apt-get install -y nvidia-driver-525
 nvidia-smi. ## if has problem, reboot the server
 ```
 
 - Install CUDA toolkit
 ```
-sudo apt install nvidia-cuda-toolkit
+sudo apt install -y nvidia-cuda-toolkit
 ```
 
 - Install Kubernetes (Master Node)
