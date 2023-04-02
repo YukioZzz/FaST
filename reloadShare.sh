@@ -45,7 +45,9 @@ helm repo update \
     --set kubeshareDeviceManager.image="yukiozhu/kubeshare-device-manager:v0.1.24-mps" \
     --set kubeshareNodeDaemon.geminiHookInit.image="yukiozhu/kubeshare-gemini-hook-init:mps" \
     --set kubeshareNodeDaemon.geminiScheduler.image="yukiozhu/kubeshare-gemini-scheduler:unlimit" \
-    --set operator.image="yukiozhu/faas-share:v0.1.24-mps"
+    --set gateway.maxIdleConnsPerHost="-1" \
+    --set gateway.replicas="1" \
+    --set operator.image="yukiozhu/faas-share:v0.1.25-mps"
 
 # Deploy Morphling
 cd $prefix/morphling && chmod +x install.sh && ./install.sh
