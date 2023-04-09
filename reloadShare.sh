@@ -33,7 +33,7 @@ kubectl get pod -A | grep node-daemon | awk '{print$2}' | xargs kubectl delete p
 kubectl get pod -A | grep nvidia-device | awk '{print$2}' | xargs kubectl delete pod -n kube-system
 
 # Deploy mps and dcgm-exporter
- kubectl apply -f mps-test/mps-server-pod.yaml
+ kubectl apply -f mps-test/mps-daemonset.yaml
 cd $prefix && sudo cp -rf ./dcgm /etc/dcgm-exporter
 kubectl apply -f dcgm/dcgm-exporter.yaml
 
@@ -54,3 +54,9 @@ cd $prefix/morphling && chmod +x install.sh && ./install.sh
 
 # Deploy autoscaler
 cd $prefix/FaSTAutoscaler && make apply IMG=yukiozhu/fastautoscaler:latest
+
+# Deploy openfaas-linkderd
+curl -sLS https://get.arkade.dev | sudo sh
+arkade install linkerd
+kubectl -n faas-share get deploy gateway -o yaml | linkerd inject --skip-outbound-ports=4222 - | kubectl apply -f -
+# kubectl annotate namespace faas-share-fn linkerd.io/inject=enabled
