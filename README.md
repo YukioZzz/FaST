@@ -1,4 +1,4 @@
-## FaST: a FaaS oriented Spatio-Temporal Sharing Framework
+## FaST-GShare:  Enabling Efficient Spatio-Temporal GPU Sharing in Serverless Computing for Deep Learning Inference
 
 #### Base Infrastructure Configuraiton and Deployment:
 - Install CUDA Driver. (both Master and Node)
