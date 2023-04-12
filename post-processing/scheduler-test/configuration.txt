@@ -1,0 +1,28 @@
+
+Test1-06
+  { duration: '5s', target: 30 },
+        { duration: '10s', target: 40 },
+        { duration: '10s', target: 50 },
+        { duration: '10s', target: 60 },
+        { duration: '15s', target: 70 },
+        { duration: '15s', target: 80 },
+        { duration: '15s', target: 90 },
+        { duration: '15s', target: 100 },
+        { duration: '15s', target: 110 },
+        { duration: '15s', target: 100 },
+        { duration: '10s', target: 90 },
+        { duration: '10s', target: 70 },
+        { duration: '20s', target: 50 },
+        { duration: '20s', target: 20 },
+      ],
+
+
+
+
+24,8s + 
+49,2s +
+1m34s +
+
+2m20 - 
+2m44s - 
+3m - 
