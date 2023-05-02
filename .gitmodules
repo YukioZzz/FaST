@@ -10,9 +10,9 @@
 	url = git@github.com:YukioZzz/morphling.git
 	branch = faas
 [submodule "FaST-Manager"]
-	branch = compare
 	path = FaST-Manager
 	url = git@github.com:YukioZzz/FaST-Manager.git
+	branch = main
 [submodule "arrow-tensorstore"]
 	path = arrow-tensorstore
 	url = git@github.com:YukioZzz/arrow-tensorstore.git
