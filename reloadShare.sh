@@ -56,5 +56,6 @@ cd $prefix/FaSTAutoscaler && make apply IMG=yukiozhu/fastautoscaler:latest
 # Deploy openfaas-linkderd
 curl -sLS https://get.arkade.dev | sudo sh
 arkade install linkerd
-kubectl -n faas-share get deploy gateway -o yaml | linkerd inject --skip-outbound-ports=4222 - | kubectl apply -f -
+export PATH=$HOME/.arkade/bin:$PATH
+kubectl -n faas-share get deploy gateway -o yaml | linkerd2 inject --skip-outbound-ports=4222 - | kubectl apply -f -
 # kubectl annotate namespace faas-share-fn linkerd.io/inject=enabled
