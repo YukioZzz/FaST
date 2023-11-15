@@ -1,6 +1,6 @@
 ## FaST-GShare:  Enabling Efficient Spatio-Temporal GPU Sharing in Serverless Computing for Deep Learning Inference
 
-Author: Jianfeng Gu, Yichao Zhu, Puxuan Wang, Mohak Chadha, Michael Gerndt
+Authors: Jianfeng Gu, Yichao Zhu, Puxuan Wang, Mohak Chadha, Michael Gerndt
 
 #### Base Infrastructure Configuraiton and Deployment:
 - Install CUDA Driver. (both Master and Node)
