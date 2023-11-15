@@ -1,5 +1,7 @@
 ## FaST-GShare:  Enabling Efficient Spatio-Temporal GPU Sharing in Serverless Computing for Deep Learning Inference
 
+Author: Jianfeng Gu, Yichao Zhu, Puxuan Wang, Mohak Chadha, Michael Gerndt
+
 #### Base Infrastructure Configuraiton and Deployment:
 - Install CUDA Driver. (both Master and Node)
 ```
@@ -75,5 +77,18 @@ kubectl apply -f FaSTAutoscaler/config/samples/fastsvc_v1_fastsvc.yaml
 - load test(remember to edit gateway ip):
 ```
 cd faas-share-test/MLPerf-based-workloads/resnet/client && k6 run k6.js 
+```
+
+
+### Publication
+If you use FaST-GShare, please cite us:
+```
+@inproceedings{gu2023fast,
+  title={FaST-GShare: Enabling Efficient Spatio-Temporal GPU Sharing in Serverless Computing for Deep Learning Inference},
+  author={Gu, Jianfeng and Zhu, Yichao and Wang, Puxuan and Chadha, Mohak and Gerndt, Michael},
+  booktitle={Proceedings of the 52nd International Conference on Parallel Processing},
+  pages={635--644},
+  year={2023}
+}
 ```
 
