@@ -4,7 +4,7 @@
 
 Authors: Jianfeng Gu, Yichao Zhu, Puxuan Wang, Mohak Chadha, Michael Gerndt
 
-#### Base Infrastructure Configuraiton and Deployment:
+#### 1. Base Infrastructure Configuraiton and Deployment:
 - Install CUDA Driver. (both Master and Node)
 ```
 sudo apt-get update
@@ -58,7 +58,7 @@ bash install_nvidia_container_toolkit.sh
 kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.13.0/nvidia-device-plugin.yml
 ```
 
-#### Deployment:
+#### 2. Deployment:
 
 - clone repo:
 ```
